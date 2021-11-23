@@ -5,7 +5,8 @@
     "module": "commonjs",
     "outDir": "./dist",
     "strict": true, // depende do seu nível de conhecimento em TypeScript, recomendo começar com false
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowJs": true
   },
   "include": [
     "./src"

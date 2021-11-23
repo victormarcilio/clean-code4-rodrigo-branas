@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "tsc && jest dist/",
-    "tsc:init": "tsc --init"
+    "test": "tsc && jest dist/ --watch",
+    "tsc:init": "tsc --init",
+    "coverage": "tsc && jest dist/ --coverage"
   },
   "keywords": [],
   "author": "",
