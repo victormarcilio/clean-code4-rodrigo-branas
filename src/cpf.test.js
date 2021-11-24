@@ -1,4 +1,4 @@
-const {validate} = require("./cpf");
+const { validate } = require("./cpf");
 
 test("Must return false when parameter is null", () => {
     const cpf = null;
@@ -32,11 +32,14 @@ test("Must return false when all digits are the same", () => {
 test("Must return true for a valid CPF", () => {
     const cpf = "628.763.840-00";
     const cpf2 = "558.155.780-29";
-
     const isValid = validate(cpf);
     const isValid2 = validate(cpf2);
-
     expect(isValid).toBeTruthy();
     expect(isValid2).toBeTruthy();
 });
 
+test("Must return false when symbols are misplaced", () => {
+    const cpf = "-..62876384000";
+    const isValid = validate(cpf);
+    expect(isValid).toBeFalsy();
+});
