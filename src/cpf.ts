@@ -14,13 +14,17 @@ export function calculateDigit(cpf: string) {
     return remainder < 2 ? '0' : `${11 - remainder}`;
 }
 
+function checkVerifierDigits(cpf: string) {
+    const digit1 = calculateDigit(cpf.substr(0, 9));
+    const digit2 = calculateDigit(cpf.substr(0, 10));
+    return digit1 + digit2 == cpf.substr(cpf.length - 2);
+}
+
 export function validate(str: string) {
     if (!hasValidFormat(str))
         return false;
     str = removeSymbols(str);
     if (str.split("").every(c => c === str[0]))
         return false;
-    const digit1 = calculateDigit(str.substr(0, 9));
-    const digit2 = calculateDigit(str.substr(0, 10));
-    return digit1 + digit2 == str.substr(str.length - 2);
+    return checkVerifierDigits(str);
 }
