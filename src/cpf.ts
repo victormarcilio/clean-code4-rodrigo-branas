@@ -20,11 +20,13 @@ function checkVerifierDigits(cpf: string) {
     return digit1 + digit2 == cpf.substr(cpf.length - 2);
 }
 
+function hasDifferentChars(str: string) {
+    return str.split("").some(c => c !== str[0]);
+}
+
 export function validate(str: string) {
     if (!hasValidFormat(str))
         return false;
     str = removeSymbols(str);
-    if (str.split("").every(c => c === str[0]))
-        return false;
-    return checkVerifierDigits(str);
+    return hasDifferentChars(str) && checkVerifierDigits(str);
 }
