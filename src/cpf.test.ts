@@ -1,15 +1,4 @@
-const { validate } = require("./cpf");
-
-test("Must return false when parameter is null", () => {
-    const cpf = null;
-    const isValid = validate(cpf);
-    expect(isValid).toBeFalsy();
-});
-
-test("Must return false when parameter is undefined", () => {
-    const isValid = validate();
-    expect(isValid).toBeFalsy();
-});
+import {validate} from "./cpf";
 
 test("Must return false when cpf has less than 11 characters", () => {
     const cpf = "0000";

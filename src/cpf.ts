@@ -1,16 +1,12 @@
-function hasValidFormat(str) {
+function hasValidFormat(str: string) {
     return /^((\d{3}\.\d{3}\.\d{3}-\d\d)|\d{11})$/.exec(str);
 }
 
-function removeSymbols(str) {
+function removeSymbols(str: string) {
     return str.replace(/\D/g, '');
 }
 
-function validate(str) {
-    if (str === null)
-        return false;
-    if (str === undefined)
-        return false;
+export function validate(str: string) {
     if (!hasValidFormat(str))
         return false;
     str = removeSymbols(str);
@@ -31,5 +27,3 @@ function validate(str) {
     const nDigResult = `${dg1}${dg2}`;
     return nDigVerific == nDigResult;
 }
-
-module.exports = { validate };
