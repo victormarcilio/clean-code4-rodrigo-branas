@@ -2,7 +2,7 @@ export class CPF {
     private readonly digits: string;
 
     constructor(cpf_input: string) {
-        this.digits = this.removeSymbols(cpf_input);
+        this.digits = this.validate(cpf_input);
     }
     hasValidFormat(str: string) {
         return /^((\d{3}\.\d{3}\.\d{3}-\d\d)|\d{11})$/.exec(str);
@@ -32,8 +32,10 @@ export class CPF {
 
     validate(str: string) {
         if (!this.hasValidFormat(str))
-            return false;
+            throw ("Invalid CPF");
         str = this.removeSymbols(str);
-        return this.hasDifferentChars(str) && this.checkVerifierDigits(str);
+        if (this.hasDifferentChars(str) && this.checkVerifierDigits(str))
+            return str;
+        throw ("Invalid CPF");
     }
 }
