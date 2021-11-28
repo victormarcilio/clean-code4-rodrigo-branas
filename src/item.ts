@@ -1,3 +1,3 @@
 export class Item {
-    constructor(description: string, id: number, price: number) { }
+    constructor(public readonly description: string, public readonly id: number, public readonly price: number) { }
 }
