@@ -1,11 +1,11 @@
 import { CPF } from "./cpf";
 
-test("Must return false when cpf has less than 11 characters", () => {
+test("Must throw when cpf has less than 11 characters", () => {
     const cpf_input = "0000";
     expect(() => new CPF(cpf_input)).toThrow();
 });
 
-test("Must return false when cpf has more than 14 characters", () => {
+test("Must throw when cpf has more than 14 characters", () => {
     const cpf_input = "0000000000000000";
     expect(() => new CPF(cpf_input)).toThrow();
 });
