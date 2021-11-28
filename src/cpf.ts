@@ -30,7 +30,7 @@ export class CPF {
         return str.split("").some(c => c !== str[0]);
     }
 
-    validate(str: string) {
+    private validate(str: string) {
         if (!this.hasValidFormat(str))
             throw ("Invalid CPF");
         str = this.removeSymbols(str);
