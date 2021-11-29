@@ -1,8 +1,8 @@
-export enum CouponTYpe {
+export enum CouponType {
     Fix,
     Percentage
 };
 
 export class Coupon {
-    constructor(description: string, couponType: CouponTYpe, value: number) { }
+    constructor(description: string, public couponType: CouponType, public value: number) { }
 };

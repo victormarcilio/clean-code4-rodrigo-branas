@@ -1,6 +1,6 @@
 import { CPF } from "./cpf";
 import { Item } from "./item";
-import { Coupon } from "./coupon";
+import { Coupon, CouponType } from "./coupon";
 
 export class Order {
     private cpf: CPF;
@@ -16,10 +16,24 @@ export class Order {
         this.items.push([item, amount]);
     }
 
-    getTotal(){
+    getTotal() {
+        const total = this.getTotalBeforeDiscount();
+        const discount = this.calculateDiscount(total);
+        return total - discount;
+    }
+
+    getTotalBeforeDiscount() {
         let total = 0;
-        for(let [item, amount] of this.items )
-            total += item.price * amount; 
+        for (let [item, amount] of this.items)
+            total += item.price * amount;
         return total;
+    }
+
+    calculateDiscount(price: number) {
+        if (this.coupon?.couponType === CouponType.Fix)
+            return Math.min(price, this.coupon.value);
+        if (this.coupon?.couponType === CouponType.Percentage)
+            return price * (100 - this.coupon?.value) / 100;
+        return 0;
     }
 }
