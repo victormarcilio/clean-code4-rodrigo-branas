@@ -1,8 +1,8 @@
 export enum CouponType {
-    Fix,
+    Fixed,
     Percentage
 };
 
 export class Coupon {
-    constructor(description: string, public couponType: CouponType, public value: number) { }
+    constructor(readonly description: string, readonly couponType: CouponType, readonly value: number, readonly expirationDate: Date) { }
 };
