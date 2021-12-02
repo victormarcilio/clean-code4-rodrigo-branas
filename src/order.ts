@@ -44,9 +44,10 @@ export class Order {
     
     calculateShipping() {
         let total = 0;
+        const MINIMUM_SHIPPING_FEE = 10;
         for (const [item, amount] of this.items) {
             total += item.shippingCost();
         }
-        return total;
+        return Math.max(total, MINIMUM_SHIPPING_FEE);
     }
 }

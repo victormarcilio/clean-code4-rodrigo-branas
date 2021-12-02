@@ -81,3 +81,10 @@ test("Should calculate correctly shipping price for one product", () => {
     const shippingCost = order.calculateShipping();
     expect(shippingCost).toBe(10);
 });
+
+test("Should calculate correctly shipping price for one product", () => {
+    const order = new Order(validCPF);
+    order.addItem(new Item("Product 1", 1, 15, 0.5), 2);   
+    const shippingCost = order.calculateShipping();
+    expect(shippingCost).toBe(10);
+});
