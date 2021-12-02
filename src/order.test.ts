@@ -83,7 +83,7 @@ test("Should give discount for an expired fixed discount coupon", () => {
 
 test("Should calculate correctly shipping price for one product", () => {
     const order = new Order(validCPF);
-    order.addItem(new Item("Product 1", 1, 15, 1));
+    order.addItem(PRODUCT_1_COSTING_15_WEIGHTING_1);
     const shippingCost = order.calculateShipping();
     expect(shippingCost).toBe(10);
 });
@@ -93,4 +93,13 @@ test("Should ensure minimum shipping fee", () => {
     order.addItem(new Item("Product 1", 1, 15, 0.5), 1);
     const shippingCost = order.calculateShipping();
     expect(shippingCost).toBe(10);
+});
+
+test("Should calculate shipping fee for multiple products", () => {
+    const order = new Order(validCPF);
+    order.addItem(PRODUCT_1_COSTING_15_WEIGHTING_1, 2);
+    order.addItem(PRODUCT_2_COSTING_8_WEIGHTING_3, 2);
+    order.addItem(PRODUCT_3_COSTING_10_WEIGHTING_40, 2);
+    const shippingCost = order.calculateShipping();
+    expect(shippingCost).toBe(880);
 });
