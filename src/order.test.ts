@@ -6,9 +6,9 @@ import { Item } from "./item";
 let unexpiredDate: Date;
 let expiredDate: Date;
 const validCPF: CPF = new CPF("558.155.780-29");
-const PRODUCT_1_COSTING_15 = new Item("Product 1", 1, 15);
-const PRODUCT_2_COSTING_8 = new Item("Product 2", 2, 8);
-const PRODUCT_3_COSTING_10 = new Item("Product 3", 3, 10);
+const PRODUCT_1_COSTING_15 = new Item("Product 1", 1, 15, 1);
+const PRODUCT_2_COSTING_8 = new Item("Product 2", 2, 8, 3);
+const PRODUCT_3_COSTING_10 = new Item("Product 3", 3, 10, 40);
 
 beforeAll(() => {
     unexpiredDate = new Date();
@@ -73,4 +73,11 @@ test("Should give discount for an expired fixed discount coupon", () => {
     order.addItem(PRODUCT_2_COSTING_8);
     order.addItem(PRODUCT_3_COSTING_10, 5);
     expect(order.getTotal()).toBe(88);
+});
+
+test("Should calculate correctly shipping price for one product", () => {
+    const order = new Order(validCPF);
+    order.addItem(new Item("Product 1", 1, 15, 1), 2);   
+    const shippingCost = order.calculateShipping();
+    expect(shippingCost).toBe(10);
 });

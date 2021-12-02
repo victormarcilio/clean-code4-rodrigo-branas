@@ -1,3 +1,7 @@
 export class Item {
-    constructor(public readonly description: string, public readonly id: number, public readonly price: number) { }
+    constructor(readonly description: string, readonly id: number, readonly price: number, readonly weight: number) { }
+
+    shippingCost() {
+        return 10 * this.weight;
+    }
 }

@@ -30,15 +30,23 @@ export class Order {
     }
 
     calculateDiscount(price: number) {
-        if(!this.coupon)
+        if (!this.coupon)
             return 0;
         const currentDate = new Date();
-        if(currentDate > this.coupon.expirationDate)
+        if (currentDate > this.coupon.expirationDate)
             return 0;
         if (this.coupon.couponType === CouponType.Fixed)
             return Math.min(price, this.coupon.value);
         if (this.coupon.couponType === CouponType.Percentage)
             return price * (100 - this.coupon?.value) / 100;
         return 0;
+    }
+    
+    calculateShipping() {
+        let total = 0;
+        for (const [item, amount] of this.items) {
+            total += item.shippingCost();
+        }
+        return total;
     }
 }
